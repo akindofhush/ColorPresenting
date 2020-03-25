@@ -62,9 +62,13 @@ class ChooseColorViewController: UIViewController, UICollectionViewDelegate, UIC
          cell.title.text = colorObjects?[indexPath.row].title
         
         let url = colorObjects?[indexPath.row].thumbnailUrl
-        if let data = try? Data(contentsOf: url ?? URL(string: "https://via.placeholder.com/150/92c952")!) {
-            cell.imageView.image = UIImage(data: data)
-        }
+        AsyncImageLoader.image(for: url ?? URL(string: "https://via.placeholder.com/150/92c952")!, completionHandler: { (image) in
+            DispatchQueue.main.async {
+                if let img = image {
+                    cell.imageView.image = img
+                }
+            }
+        })
         
         return cell
     }
