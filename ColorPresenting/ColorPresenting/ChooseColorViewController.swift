@@ -43,10 +43,6 @@ class ChooseColorViewController: UIViewController, UICollectionViewDelegate, UIC
                     if let colorObjects = try? decoder.decode([ColorObject].self, from: data) {
                         DispatchQueue.main.async{
                             self.colorObjects = colorObjects
-//                            for colorObject in colorObjects {
-//                                print(colorObject)
-//                                String(colorObjects?[indexPath.row].id ?? 1)
-//                            }
                         }
                     }
                 }
@@ -73,8 +69,6 @@ class ChooseColorViewController: UIViewController, UICollectionViewDelegate, UIC
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segue" {
             (segue.destination as! ColorPresentingViewController).cell = (sender as! ColorCell)

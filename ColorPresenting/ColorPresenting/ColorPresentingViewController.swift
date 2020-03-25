@@ -16,13 +16,18 @@ class ColorPresentingViewController: UIViewController {
     var cell: ColorCell?
     
     override func viewDidLoad() {
-        change()
+        setItems()
     }
-    func change(){
-        if let cellTem = cell{
-            imageView?.image = cellTem.imageView.image
-            idLabel.text = cellTem.id.text
-            titleLabel.text = cellTem.title.text
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    func setItems(){
+        if let cellItem = cell{
+            imageView?.image = cellItem.imageView.image
+            idLabel.text = cellItem.id.text
+            titleLabel.text = cellItem.title.text
         }
     }
 }
