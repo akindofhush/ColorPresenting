@@ -10,7 +10,7 @@ import UIKit
 
 class ColorPresentingViewController: UIViewController {
 
-    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var imageView: UIImageView?
     @IBOutlet var idLabel: UILabel!
     @IBOutlet var titleLabel: UILabel!
 }

@@ -26,8 +26,9 @@ class ChooseColorViewController: UIViewController, UICollectionViewDelegate, UIC
         layout.minimumLineSpacing = CGFloat(integerLiteral: 0)
         layout.minimumInteritemSpacing = CGFloat(integerLiteral: 0)
         colorCollectionView.setCollectionViewLayout(layout, animated: false)
-        
-        getJSONData()
+        DispatchQueue.global(qos: .default).async(execute: {() -> Void in
+            self.getJSONData()
+        })
     }
     
     func getJSONData() {
@@ -75,13 +76,19 @@ class ChooseColorViewController: UIViewController, UICollectionViewDelegate, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = ColorPresentingViewController()
+//        let vc = ColorPresentingViewController()
         let cell = collectionView.cellForItem(at: indexPath) as! ColorCell
-        vc.imageView.image = cell.imageView.image
-        vc.idLabel.text = cell.id.text
-        vc.titleLabel.text = cell.title.text
-        self.navigationController?.pushViewController(vc, animated: true)
+//        vc.imageView.image = cell.imageView.image
+//        vc.idLabel.text = cell.id.text
+//        vc.titleLabel.text = cell.title.text
+//        self.navigationController?.pushViewController(vc, animated: true)
+        self.performSegue(withIdentifier: "segue", sender: self)
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segue" {
+            // Setup new view controller
+            print((sender as! ColorCell).imageView.image)
+        }
+    }
 }
 
