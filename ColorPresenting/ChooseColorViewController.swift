@@ -15,6 +15,10 @@ class ChooseColorViewController: UIViewController, UICollectionViewDelegate, UIC
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     @IBOutlet var colorCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +47,9 @@ class ChooseColorViewController: UIViewController, UICollectionViewDelegate, UIC
                     if let colorObjects = try? decoder.decode([ColorObject].self, from: data) {
                         DispatchQueue.main.async{
                             self.colorObjects = colorObjects
+                            for colorObject in colorObjects {
+                                print (colorObject)
+                            }
                         }
                     }
                 }
